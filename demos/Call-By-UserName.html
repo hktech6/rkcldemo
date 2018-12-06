@@ -66,6 +66,7 @@
         <tr>
             <td colspan="2">
                 <div id="videos-container" style="margin: 20px 0;"></div>
+                <span id="is_mute" onclick="onMute()">Mute</span>
             </td>
         </tr>
     </table>
@@ -120,7 +121,15 @@ connection.onstream = function(event) {
     event.mediaElement.removeAttribute('srcObject');
     event.mediaElement.muted = true;
     event.mediaElement.volume = 0;
-
+    
+    //is_mute
+      console.log("llllllllll");
+        var is_mute = document.getElementById('is_mute');
+        is_mute.onclick = function(e){
+            event.isAudioMuted = false;
+            console.log(event);
+        }
+        
     var video = document.createElement('video');
 
     try {
@@ -145,7 +154,7 @@ connection.onstream = function(event) {
 
     var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
     var mediaElement = getHTMLMediaElement(video, {
-        //title: event.userid,
+        title: event.userid,
         buttons: ['full-screen'],
         width: width,
         showOnMouseEnter: false
