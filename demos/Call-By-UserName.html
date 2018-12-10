@@ -188,9 +188,12 @@ connection.onMediaError = function(e) {
     }
 };
 
-//connection.onNewParticipant = function(participantId,userPreferences){
-//    console.log("news");
-//}
+userPreferences1 = userPreferences1 || {}; 
+var remotid = connection.sessionid;
+connection.onNewParticipant = function(remotid,userPreferences1){
+    console.log("news");
+    console.log("remotid="+remotid);
+}
 
 // ..................................
 // ALL below scripts are redundant!!!
