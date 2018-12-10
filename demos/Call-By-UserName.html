@@ -123,13 +123,9 @@ connection.onstream = function(event) {
     event.mediaElement.volume = 0;
     
     //is_mute
-      console.log("llllllllll");
-        var is_mute = document.getElementById('is_mute');
-        is_mute.onclick = function(e){
-            event.isAudioMuted = false;
-            console.log(event);
-        }
+       // console.log("llllllllll");
         
+
     var video = document.createElement('video');
 
     try {
@@ -191,6 +187,10 @@ connection.onMediaError = function(e) {
         connection.join(connection.sessionid);
     }
 };
+
+connection.onNewParticipant = function(participantId,userPreferences){
+    console.log("news");
+}
 
 // ..................................
 // ALL below scripts are redundant!!!
