@@ -1,1 +1,1 @@
-var RTCMultiConnection = function(roomid, forceOptions) {
+var RTCMultiConnection = function (roomid, forceOptions) {

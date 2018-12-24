@@ -74,7 +74,10 @@
     
   </section>
 
-<script src="/dist/RTCMultiConnection.min.js"></script>
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="/dist/rkcldemo_db.js"></script>-->
+<script src="/dist/user_data.js"></script>
+<script src="/dist/RTCMultiConnection.js"></script>
 <script src="/node_modules/webrtc-adapter/out/adapter.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 
@@ -82,11 +85,14 @@
 <link rel="stylesheet" href="/dev/getHTMLMediaElement.css">
 <script src="/dev/getHTMLMediaElement.js"></script>
 <script>
+  
+ 
 // ......................................................
 // ..................RTCMultiConnection Code.............
 // ......................................................
 
 var connection = new RTCMultiConnection();
+
 
 // by default, socket.io server is assumed to be deployed on your own URL
 connection.socketURL = '/';
@@ -197,6 +203,7 @@ connection.onMediaError = function(e) {
 var joinCalleeUsingHisUsername = document.getElementById('join-callee-using-his-username');
 joinCalleeUsingHisUsername.onclick = function() {
     this.disabled = true;
+    console.log("hh");
     connection.checkPresence(calleeUserName.value, function(isOnline, username) {
         if(!isOnline) {
             joinCalleeUsingHisUsername.disabled = false;
@@ -215,6 +222,7 @@ joinCalleeUsingHisUsername.onclick = function() {
 // caller
 var currentUserName = document.getElementById('current-username');
 currentUserName.onkeyup = currentUserName.onpaste = currentUserName.oninput = function() {
+    console.log(this.value);
     localStorage.setItem(this.id, this.value);
 };
 currentUserName.value = localStorage.getItem(currentUserName.id) || connection.token();

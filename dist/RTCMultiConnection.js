@@ -174,7 +174,7 @@ var RTCMultiConnection = function(roomid, forceOptions) {
         } catch (e) {
             connection.socket = io.connect(connection.socketURL + parameters, connection.socketOptions);
         }
-
+console.log(connection.socketOptions);
         var mPeer = connection.multiPeersHandler;
 
         connection.socket.on('extra-data-updated', function(remoteUserId, extra) {
@@ -4670,6 +4670,7 @@ var RTCMultiConnection = function(roomid, forceOptions) {
                 identifier: connection.publicRoomIdentifier,
                 password: typeof connection.password !== 'undefined' && typeof connection.password !== 'object' ? connection.password : ''
             }, function(isRoomOpened, error) {
+                
                 if (isRoomOpened === true) {
                     if (connection.enableLogs) {
                         console.log('isRoomOpened: ', isRoomOpened, ' roomid: ', connection.sessionid);

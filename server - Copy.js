@@ -2,16 +2,16 @@ var fs = require('fs');
 var path = require('path');
 var url = require('url');
 //var app = require('./app');
-//var Connection = require('Connection');
+var Connection = require('Connection');
 
-//require('./dist/user_data')(Connection);
+
 
 //var firstParameter = {
 //    config: __dirname + resolveURL('/config.json'),
 //    logs: __dirname + resolveURL('/logs.json')
 //};
 
-require('rtcmulticonnection-server')(null, function (request, response, config, root, BASH_COLORS_HELPER, pushLogs, resolveURL, getJsonFile) {
+require('rtcmulticonnection-server')(null, function(request, response, config, root, BASH_COLORS_HELPER, pushLogs, resolveURL, getJsonFile) {
     try {
         var uri, filename;
 
@@ -24,11 +24,11 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
                 config.dirPath = null;
             }
 
-
+            console.log('filename');
             uri = url.parse(request.url).pathname;
-
+            console.log(request.url);
             filename = path.join(config.dirPath ? resolveURL(config.dirPath) : process.cwd(), uri);
-
+            
         } catch (e) {
             pushLogs(root, 'url.parse', e);
         }
@@ -48,7 +48,7 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
             }
         }
 
-        if (filename.indexOf(resolveURL('/admin/')) !== -1 && config.enableAdmin !== true) {
+        if(filename.indexOf(resolveURL('/admin/')) !== -1 && config.enableAdmin !== true) {
             try {
                 response.writeHead(401, {
                     'Content-Type': 'text/plain'
@@ -63,19 +63,18 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
         }
 
         var matched = false;
-        ['/demos/', '/dev/', '/dist/', 'connection', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function (item) {
+        ['/demos/', '/dev/', '/dist/', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function(item) {
             if (filename.indexOf(resolveURL(item)) !== -1) {
                 matched = true;
             }
         });
 
         // files from node_modules
-        ['RecordRTC.js', 'FileBufferReader.js', 'getStats.js', 'getScreenId.js', 'adapter.js', 'MultiStreamsMixer.js'].forEach(function (item) {
+        ['RecordRTC.js', 'FileBufferReader.js', 'getStats.js', 'getScreenId.js', 'adapter.js', 'MultiStreamsMixer.js'].forEach(function(item) {
             if (filename.indexOf(resolveURL('/node_modules/')) !== -1 && filename.indexOf(resolveURL(item)) !== -1) {
                 matched = true;
             }
         });
-
 
         if (filename.search(/.js|.json/g) !== -1 && !matched) {
             try {
@@ -90,7 +89,7 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
             }
         }
 
-        ['Video-Broadcasting', 'Screen-Sharing', 'Switch-Cameras'].forEach(function (fname) {
+        ['Video-Broadcasting', 'Screen-Sharing', 'Switch-Cameras'].forEach(function(fname) {
             try {
                 if (filename.indexOf(fname + '.html') !== -1) {
                     filename = filename.replace(fname + '.html', fname.toLowerCase() + '.html');
@@ -107,10 +106,8 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
 
             if (filename.search(/demos/g) === -1 && filename.search(/admin/g) === -1 && stats.isDirectory() && config.homePage === '/demos/index.html') {
                 if (response.redirect) {
-
                     response.redirect('/demos/');
                 } else {
-
                     response.writeHead(301, {
                         'Location': '/demos/'
                     });
@@ -128,7 +125,6 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
         }
 
         try {
-
             if (fs.statSync(filename).isDirectory()) {
                 response.writeHead(404, {
                     'Content-Type': 'text/html'
@@ -169,13 +165,8 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
         if (filename.toLowerCase().indexOf('.png') !== -1) {
             contentType = 'image/png';
         }
-        if (filename.indexOf(resolveURL('/demos/dashboard/')) !== -1) {
-            //filename = filename.replace(resolveURL('/demos/dashboard/'), '');
-            filenames = resolveURL('/demos/dashboard/header.html');
-            console.log(filenames);
-            console.log(filename);
-        }
-        fs.readFile(filename, 'binary', function (err, file) {
+
+        fs.readFile(filename, 'binary', function(err, file) {
             if (err) {
                 response.writeHead(500, {
                     'Content-Type': 'text/plain'
@@ -187,8 +178,7 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
 
             try {
                 file = file.replace('connection.socketURL = \'/\';', 'connection.socketURL = \'' + config.socketURL + '\';');
-            } catch (e) {
-            }
+            } catch (e) {}
 
             response.writeHead(200, {
                 'Content-Type': contentType
