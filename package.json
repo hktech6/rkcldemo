@@ -1,0 +1,41 @@
+{
+  "name": "rkcldemo",
+  "version": "1.0.0",
+  "description": "<a href=\"https://www.rtcmulticonnection.org/\"><img src=\"https://i.imgur.com/MFfRBSM.png\" /></a>",
+  "main": "Gruntfile.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "consolidate": "^0.15.1",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.3",
+    "emit": "^0.0.2",
+    "emailjs-com": "^2.3.2",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "http": "^0.0.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.3.16",
+    "morgan": "^1.9.1",
+    "moment": "^2.22.2",
+    "socket.io": "^2.2.0",
+    "swig": "^1.4.2",
+    "stylus": "^0.54.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hktech6/rkcldemo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hktech6/rkcldemo/issues"
+  },
+  "homepage": "https://github.com/hktech6/rkcldemo#readme"
+}
