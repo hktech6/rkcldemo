@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="theme-color" content="#33b5e5">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="/demos/css/compiled-4.6.1.css" rel="stylesheet">
+
+
+
+    </head>
+    <body class="fixed-sn mdb-skin-custom" data-spy="scroll" data-target="#scrollspy" data-offset="15" aria-busy="true" style="">
+        <nav class="navbar fixed-top navbar-expand-md navbar-light white double-nav scrolling-navbar col-sm-12">
+            <a class="navbar-brand" href="#"><img style="    margin-top: -15%; height:50px;" src="/demos/myrkcl_logo.png"></a>
+
+            <!-- Collection of nav links, forms, and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse col-md-12 col-sm-12 col-xs-12 " style="float:right">
+                My Rkcl Virtual Classroom User Login/Signup
+            </div>
+        </nav>
+        <main>
+            <div class="container-fluid">
+                <div class="main-tabs-docs">
+                    <div class="tab-content">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12 col-lg-12 col-md-12"></div>
+                            <section id="register-form">
+
+                                <!--Grid row-->
+                                <div class="row">
+                                    <div class="col-md-12 mb-6">
+                                        <!--Section: Live preview-->
+                                        <section class="pr-1">
+                                            <!-- Material form register -->
+                                            <div class="card">
+                                                <h5 class="card-header info-color white-text text-center py-4">
+                                                    <strong>Virtual Classroom Sign up</strong>
+                                                </h5>
+                                                <div class="alert alert-danger alert-dismissible" id="error_alert" style="display:none">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                    <span></span>
+                                                </div>
+                                                <!--Card content-->
+                                                <div class="card-body px-lg-5 pt-0">
+                                                    <!-- Form -->
+
+                                                    <form class="text-center" id="register" method="post" style="color: #757575;">
+
+                                                        <div class="form-row">
+
+                                                            <div class="col">
+
+                                                                <!-- First name -->
+                                                                <div class="md-form">
+                                                                    <input type="text" id="first_name" name="first_name" class="form-control" >
+                                                                    <label for="materialRegisterFormFirstName">First name</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <!-- Last name -->
+                                                                <div class="md-form">
+                                                                    <input type="text" id="materialRegisterFormLastName" name="last_name" class="form-control" required>
+                                                                    <label for="materialRegisterFormLastName">Last name</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- E-mail -->
+                                                        <div class="md-form mt-0">
+                                                            <input type="email" name="email" id="materialRegisterFormEmail" class="form-control" required>
+                                                            <label for="materialRegisterFormEmail">E-mail</label>
+                                                        </div>
+
+
+                                                        <!-- E-mail -->
+                                                        <div class="md-form mt-0">
+                                                            <input type="text" name="user_name" id="materialRegisterFormUser" class="form-control" required>
+                                                            <label for="materialRegisterFormUser">User Name</label>
+                                                        </div>
+
+                                                        <!-- Password -->
+                                                        <div class="md-form">
+                                                            <input type="password" id="materialRegisterFormPassword" name="password" class="form-control" required aria-describedby="materialRegisterFormPasswordHelpBlock">
+                                                            <label for="materialRegisterFormPassword">Password</label>
+                                                            <!--                                                            <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                                                                                                                            At least 8 characters and 1 digit
+                                                                                                                        </small>-->
+                                                        </div>
+
+                                                        <!-- Phone number -->
+                                                        <div class="md-form">
+                                                            <input type="text" id="materialRegisterFormPhone" name="mobile_no" required class="form-control" aria-describedby="materialRegisterFormPhoneHelpBlock">
+                                                            <label for="materialRegisterFormPhone">Phone number</label>
+
+                                                        </div>
+
+                                                        <select class="mdb-select" name="user_type">
+                                                            <option value="1">Presenter</option>
+                                                            <option value="2">Attendees</option>                                                            
+                                                        </select>
+
+                                                        
+
+                                                        <!-- Sign up button -->
+                                                        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign Up</button>
+
+                                                        <!-- Social register -->
+                                                        <p>or sign up with:</p>
+
+                                                        <a type="button" class="btn-floating btn-fb btn-sm waves-effect waves-light">
+                                                            <i class="fab fa-facebook-f"></i>
+                                                        </a>
+                                                        <a type="button" class="btn-floating btn-tw btn-sm waves-effect waves-light">
+                                                            <i class="fab fa-twitter"></i>
+                                                        </a>
+                                                        <a type="button" class="btn-floating btn-li btn-sm waves-effect waves-light">
+                                                            <i class="fab fa-linkedin-in"></i>
+                                                        </a>
+                                                        <a type="button" class="btn-floating btn-git btn-sm waves-effect waves-light">
+                                                            <i class="fab fa-github"></i>
+                                                        </a>
+
+                                                        <hr>
+                                                    </form>
+                                                    <!-- Form -->
+
+                                                </div>
+
+                                            </div>
+                                            <!-- Material form register -->
+
+                                        </section>
+
+
+                                    </div>
+                                    <!--Grid column-->
+
+                                </div>
+                                <!--Grid row-->
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="overlay" >
+                <div class="loader"></div>
+            </div>
+
+        </main>
+        <script type="text/javascript" src="/demos/js/login.js"></script>
+        <!--<script type="text/javascript" src="/demos/js/compiled-4.6.1.js"></script>-->
+        <!--<script type="text/javascript">(function runJS() {})();</script>-->
+        <div class="hiddendiv common">
+
+        </div>
+
+    </body>
+</html>
+<style>
+    #overlay {
+        position: fixed;
+        display:none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 2;
+        cursor: pointer;
+    }
+    .loader{ position: absolute;
+             left: 50%;
+             top: 50%;
+             z-index: 1;
+
+             margin: -75px 0 0 -75px;
+             border: 16px solid #f3f3f3;
+             border-radius: 50%;
+             border-top: 16px solid #3498db;
+             width: 120px;
+             height: 120px;
+
+             animation: spin 2s linear infinite;
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/demos/js/jquery.validate.min.js" ></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="/demos/js/mdb.min.js"></script>
+<script>
+
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("submitted!");
+        }
+    });
+
+    $(document).ready(function () {
+        $('.mdb-select').material_select();
+        //$('#register').validator().on('submit', function (e) {
+        $('#register').validate({
+            rules: {
+                first_name: "required",
+                last_name: "required",
+                username: {
+                    required: true,
+                    minlength: 2
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+//                        confirm_password: {
+//                            required: true,
+//                            minlength: 5,
+//                            equalTo: "#password"
+//                        },
+                email: {
+                    required: true,
+                    email: true
+                },
+                agree: "required"
+            },
+            messages: {
+                firstname: "Please enter your firstname",
+                lastname: "Please enter your lastname",
+                username: {
+                    required: "Please enter a username",
+                    minlength: "Your username must consist of at least 2 characters"
+                },
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 5 characters long"
+                },
+                confirm_password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 5 characters long",
+                    equalTo: "Please enter the same password as above"
+                },
+                email: "Please enter a valid email address",
+                agree: "Please accept our policy"
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Add the `help-block` class to the error element
+                error.addClass("help-block");
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+            },
+            submitHandler: function (form) {
+
+                var formData = $(this).serializeArray();
+                $(form).ajaxSubmit({
+                    type: 'POST',
+                    // dataType: 'json',
+                    url: '/users/register',
+                    data: formData, // JSON.stringify(data),
+                    beforeSend: function () {
+                        // setting a timeout
+                        $('#overlay').show();
+                    },
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg.status == 1) {
+                            window.location.href = "/users/login";
+                        } else {
+                            $('#error_alert').show();
+                            $('#error_alert span').html(msg.message);
+                        }
+                    },
+                    error: function (xhr) { // if error occured
+                        alert("Error occured.please try again");
+                        $('#overlay').hide();
+                    },
+                    complete: function (result) {
+                        if (result.status == 200) {
+                            $('#overlay').hide();
+                        }
+
+                    },
+                });
+            }
+        });
+    });
+
+</script>
+

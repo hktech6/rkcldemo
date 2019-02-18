@@ -1,0 +1,657 @@
+
+<!--Main layout-->
+<main class="pt-4">
+    <!--Section: Page content-->
+    <section id="mdb-panel-page-content">
+        <!-- Table with panel -->
+        <div class="card card-cascade narrower">
+            <!--Card image-->
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+                <div>
+                    <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                        <i class="fas fa-th-large mt-0"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                        <i class="fas fa-columns mt-0"></i>
+                    </button>
+                </div>
+
+                <a href="" class="white-text mx-3">Classes List</a>  
+                <div>
+                    {% if user_role == '1' %}
+                    
+                  
+                  
+                    <button type="button"  class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#modalCreateClass">
+                        <i class="fas fa-user-plus mt-0" data-toggle="tooltip" data-placement="top" title="Add classroom"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#modalConfirmDelete">
+                        <i class="far fa-trash-alt mt-0" data-toggle="tooltip" data-placement="top" title="Delete classroom"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                        <i class="fas fa-info-circle mt-0"></i>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!--Modal: modalConfirmDelete-->
+            <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md  modal-notify modal-danger" role="document">
+                    <!--Content-->
+                    <div class="modal-content text-center">
+                        <!--Header-->
+                        <div class="modal-header d-flex justify-content-center">
+                            <p class="heading">Are you sure, you want to Delete selected class?</p>
+                        </div>
+
+                        <!--Body-->
+                        <div class="modal-body">
+                            <div class="delete_msg text-center error"></div>
+                            <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+                        </div>
+
+                        <!--Footer-->
+                        <div class="modal-footer flex-center">
+                            <a data-project="" id="confirm-class-deletion" class="btn  btn-outline-secondary-modal waves-effect waves-light">Yes</a>
+                            <a type="button" class="btn  btn-primary-modal waves-effect" data-dismiss="modal">No</a>
+                        </div>
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
+            <!--Modal: modalConfirmDelete-->
+
+            <!-- class add model start-->
+            <div class="modal fade" id="modalCreateClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                        <div id="preloader" class="checkout-preloader-container" style="display: none;">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer spinner-blue-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Material form contact -->
+                        <div class="card">
+
+                            <h5 class="card-header info-color white-text text-center py-4">
+                                <strong>Create A New Class</strong>
+                            </h5>
+                            <!--Card content-->
+                            <div class="card-body px-lg-5 pt-0">
+
+                                <!-- Form -->
+                                <form id="class_add" class="text-center" style="color: #757575;" method="post"> 
+                                    <select class="mdb-select" name="class_type">
+                                        <option value="normal">Canvas Tool + Chat</option>
+                                        <option value="canvas-stream">Canvas Tool + Chat + Canvas Stream</option>
+                                        <option value="screen-sharing" selected>Canvas Tool + Chat + Screen Sharing</option>
+                                    </select>
+
+                                    <!-- E-mail -->
+                                    <div class="md-form">
+                                        <input type="text" id="txt-roomid" name="class_id" class="form-control form-control-sm">                                         
+                                        <label for="txt-roomid" class="">Enter Room Id</label>
+                                    </div>
+
+                                    <!-- Name -->
+                                    <div class="md-form mt-3">
+                                        <input type="text" id="txt-user-name" name="user_name" class="form-control">
+                                        <label for="txt-user-name">Enter Your Name</label>
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <!-- First name -->
+                                            <div class="md-form">
+                                                <input type="text" id="date-start" name="date_start" class="form-control">
+                                                <label for="date-start">Start From</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <!-- Last name -->
+                                            <div class="md-form">
+                                                <input type="text" id="date-end" name="date_end"  class="form-control">
+                                                <label for="date-end">End On</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Send button -->
+                                    <button class="btn btn-info waves-effect waves-light" type="submit">submit</button>
+
+                                    <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Cancel</a>
+                                </form>
+                                <!-- Form -->
+                            </div>
+
+                        </div>
+                        <!-- Material form contact -->
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
+            <!-- class add model end-->
+
+            <div class="px-3">              
+
+                <div class="table-wrapper">
+                    <!--Table-->
+                    <table  id="dtMaterialDesignExample" class="table table-striped table-hover dt-responsive display nowrap" cellspacing="0" width="100%">
+
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input class="form-check-input selectAll" type="checkbox"  id="checkbox">
+                                    <label class="form-check-label" for="checkbox"> </label>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript://">Class Name                                             
+                                    </a>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript://">Class Type                                              
+                                    </a>
+                                </th>
+                                <th class="th">
+                                    <a href="javascript://">From
+                                    </a>
+                                </th>
+                                <th class="th">
+                                    <a href="javascript://">To                                                
+                                    </a>
+                                </th>
+                                <th class="th">
+                                    <a href="javascript://">Status
+                                    </a>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript://">Created
+                                    </a>
+                                </th>
+
+                                <th class="th-lg">
+                                    <a href="javascript://">Action
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+
+                        <!--Table body-->
+                        <tbody>
+                            <tr >
+                                <td scope="row"></td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+        <!--Edit Class -->
+
+        <div class="modal fade modalEditClass" id="modalEditClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">   
+                    <!-- Material form contact -->
+                    <div class="card">
+                        <h5 class="card-header info-color white-text text-center py-4">
+                            <strong>Edit Class</strong>
+                        </h5>
+                        <!--Card content-->
+                        <div class="card-body px-lg-5 pt-0">
+
+                            <!-- Form -->
+                            <form id="class_edit" class="text-center" style="color: #757575;" method="post"> 
+                                <input type="hidden" id="edit_id" value="" name="edit_id" class="form-control form-control-sm">
+                                <select class="mdb-select" name="class_type">
+                                    <option value="normal">Canvas Tool + Chat</option>
+                                    <option value="canvas-stream">Canvas Tool + Chat + Canvas Stream</option>
+                                    <option value="screen-sharing" >Canvas Tool + Chat + Screen Sharing</option>
+                                </select>
+
+                                <!-- E-mail -->
+                                <div class="md-form">
+                                    <input type="text" id="txt-roomid" value="" name="class_id" class="form-control form-control-sm">                                         
+                                    <label class="ed_active" for="txt-roomid ed_active" class="">Enter Room Id</label>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="md-form mt-3">
+                                    <input type="text" id="txt-user-name" value="" name="user_name" class="form-control">
+                                    <label class="ed_active" for="txt-user-name">Enter Your Name</label>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col">
+                                        <!-- First name -->
+                                        <div class="md-form">
+                                            <input type="text" id="date-start" value="" name="date_start" class="form-control">
+                                            <label class="ed_active" for="date-start">Start From</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <!-- Last name -->
+                                        <div class="md-form">
+                                            <input type="text" id="date-end" value="" name="date_end"  class="form-control">
+                                            <label class="ed_active" for="date-end">End On</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <select class="class_status md-form colorful-select dropdown-primary" name="class_status">                                    
+                                    <option value="0">In Active</option> 
+                                    <option value="1">Active</option>
+                                </select>
+                                <!-- Send button -->
+                                <button class="btn btn-info waves-effect waves-light" type="submit">submit</button>
+
+                                <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Cancel</a>
+                            </form>
+                            <!-- Form -->
+                        </div>
+
+                    </div>
+                    <!-- Material form contact -->
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
+        <!-- Central Modal Medium Info -->
+        <div class="modal fade" id="successModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-notify modal-info" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p class="heading lead"></p>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="text-center" id="success_txt">
+
+                        </div>
+                    </div>                    
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Central Modal Medium Info-->
+        <!--edit class end-->
+
+        <!-- Table with panel -->
+
+    </section>
+    <!--Section: Page content-->
+</main>
+
+
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="/demos/js/datatables.min.js"></script>
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
+<link rel="stylesheet" href="http://cdn.datatables.net/responsive/1.0.2/css/dataTables.responsive.css"/>
+
+<script src="/demos/js/mdb.min.js"></script>
+<link href="/demos/css/datatables.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/demos/css/bootstrap-material-datetimepicker.css" />
+
+<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+
+<script type="text/javascript" src="/demos/js/bootstrap-material-datetimepicker.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<!--<script src="/demos/js/bootstrap.min.js"></script>-->
+
+<script>
+    $(".selectAll").on("click", function () {
+        if ($(this).is(':checked')) {
+            $("input:checkbox").prop('checked', true);
+        } else {
+            $("input:checkbox").prop('checked', false);
+        }
+    });
+
+    //$(document).ready(function(){
+    $('.modalEditClass #date-end,#date-end').bootstrapMaterialDatePicker
+            ({
+                weekStart: 0,
+                format: 'YYYY/MM/DD HH:MM:ss',
+                minDate: new Date()
+            });
+    $('.modalEditClass #date-start,#date-start').bootstrapMaterialDatePicker
+            ({
+                weekStart: 0,
+                format: 'YYYY/MM/DD HH:MM:ss',
+                shortTime: true,
+                minDate: new Date()
+            }).on('change', function (e, date)
+    {
+        //$('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+    });
+
+    function openEditModel(str) {
+        data = str.split(',');
+
+        $('.modalEditClass select[name="class_type"] option').each(function (index, value) {
+            if ($(this).val() == data[2]) {
+                $(this).attr('selected', true);
+
+            }
+        });
+
+        $('.modalEditClass select[name="class_status"] option').each(function (index, value) {
+            $(this).attr('selected', false);
+            if ($(this).val() === data[9]) {
+
+                $(this).attr('selected', true);
+                $('.class_status').material_select('destroy');
+                $('.class_status').material_select();
+            }
+
+        });
+        $('.modalEditClass select[name="class_status"]').click(function () {
+
+        });
+
+
+        //$('.class_status .mdb-select').material_select('destroy');
+        //   
+        $('.ed_active').addClass('active');
+        $('.modalEditClass input[name="edit_id"]').val(data[0]);
+        $('.modalEditClass input[name="class_id"]').val(data[1]);
+        $('.modalEditClass input[name="user_name"]').val(data[8]);
+        $('.modalEditClass input[name="date_start"]').val(data[10]);
+        $('.modalEditClass input[name="date_end"]').val(data[11]);
+
+        //$('.modalEditClass')
+    }
+
+    $('#min-date').bootstrapMaterialDatePicker({format: 'YYYY/MM/DD HH:MM:ss', minDate: new Date()});
+
+    var table = $('#dtMaterialDesignExample').DataTable({
+        "ajax": '/users/classes/list/',
+        responsive: true,
+        //processing: true,
+        // searching: false,
+        serverSide: false,
+        searching: true,
+        'columnDefs': [{
+                'targets': 0,
+                'searchable': false,
+                'orderable': false,
+                //'width': '1%',
+                //'className': 'dt-body-center',
+                'render': function (data, type, full, meta) {
+                    //console.log(full[1]);
+                    chk = ' <input class="form-check-input" value="' + data + '" type="checkbox" name="select_class_ids[]" id="checkbox_' + data + '">';
+                    chk += '<label class="form-check-label" for="checkbox_' + data + '" class="label-table"></label>';
+                    return chk;
+                }
+            },
+            {
+                'targets': 7,
+                'searchable': false,
+                'orderable': false,
+                // 'width': '1%',
+                //'className': 'dt-body-center',
+                'render': function (data, type, full, meta) {
+                    var all_data = full.toString();
+                    //console.log(full[12]);
+                    btn = '';
+                    
+
+                        btn += '<a href="/users/classes/view?id=' + data + '"  class="btn btn-outline-info btn-rounded btn-sm px-2 waves-effect waves-light">'
+                        btn += '<i data-toggle="tooltip" data-placement="top" title="View" class="waves-effect  fas fa-share primary"></i>'
+                        btn += '</a>';
+                        
+                    if (full[12] == 1) {
+                        btn += '<button data-toggle="modal" data-target=".modalEditClass" class="btn btn-outline-primary btn-rounded btn-sm px-2 waves-effect waves-light" onclick="openEditModel(\'' + all_data + '\')">'
+                        btn += '<i data-toggle="tooltip" data-placement="top" title="Edit" class="waves-effect fas fa-edit primary"></i>'
+                        btn += '</button>';
+                        
+                    }
+                    
+                    return btn;
+                }
+            }
+        ],
+    });
+
+
+    // var table = $('#dtMaterialDesignExample').DataTable();
+
+    $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+        $(this).parent().append($(this).children());
+    });
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+        $('#dtMaterialDesignExample_filter input').attr("placeholder", "Search");
+        $('input').removeClass('form-control-sm');
+    });
+    $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+    $('#dtMaterialDesignExample_wrapper select').removeClass(
+            'custom-select custom-select-sm form-control form-control-sm');
+    $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+    $('#dtMaterialDesignExample_wrapper .mdb-select,.mdb-select').materialSelect();
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+
+
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("submitted!");
+        }
+    });
+
+    //$(document).ready(function () {
+    //$('#register').validator().on('submit', function (e) {
+
+    $('#class_add, #class_edit').each(function () {
+        $(this).validate({
+            rules: {
+                date_start: "required",
+                date_end: "required",
+                class_id: "required",
+                user_name: {
+                    required: true,
+                    minlength: 2
+                }
+
+
+            },
+            messages: {
+//                date_start: "Please enter your Start date time",
+//                date_end: "Please enter end date time",
+                username: {
+                    required: "Please enter a username",
+                    minlength: "Your username must consist of at least 2 characters"
+                },
+
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Add the `help-block` class to the error element
+                error.addClass("help-block");
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+            },
+            submitHandler: function (form) {
+
+                var formData = $(form).serializeArray();
+                var current_form_id = $(form).attr('id');
+                if (current_form_id == 'class_edit') {
+                    url = '/users/update_class';
+                } else {
+                    url = '/users/classes';
+                }
+                $.ajax({
+                    type: 'POST',
+                    // dataType: 'json',
+                    url: url,
+                    data: formData, // JSON.stringify(data),
+                    beforeSend: function () {
+                        // setting a timeout
+                        $('#preloader').show();
+                    },
+                    success: function (msg) {
+
+                        if (msg.status == 1) {
+                            $('#txt-roomid').val('');
+                            $('#txt-user-name').val('');
+                            $('#date-start').val('');
+                            $('#date-end').val('');
+
+                            if (current_form_id == 'class_edit') {
+                                $('#modalEditClass').modal('hide');
+                            } else {
+                                $('#modalCreateClass').modal('hide');
+                            }
+
+                            $('#successModel .heading').text('Successful');
+                            //success_txt
+                            $('#preloader').hide();
+                            $('#successModel').modal('show');
+
+                            $('#success_txt').html('<i class="fas fa-check fa-4x mb-3 animated rotateIn"></i><h2>' + msg.message + '</h2>');
+                            $('#successModel .modal-dialog').removeClass('modal-danger');
+                            $('#successModel .modal-dialog').addClass('modal-info');
+                            //  table.destroy();
+                            table.ajax.reload();
+                        } else {
+
+                            $('#successModel .heading').text('Error');
+                            $('#success_txt').html('<i class="fas fa-close fa-4x mb-3 animated rotateIn"></i><h2>' + msg.message + '</h2>');
+                            $('#successModel .modal-dialog').removeClass('modal-info');
+                            $('#successModel .modal-dialog').addClass('modal-danger');
+
+                            $('#successModel').modal('show');
+                        }
+                    },
+                    error: function (xhr) { // if error occured
+                        alert("Error occured.please try again");
+                        $('#preloader').hide();
+                    },
+                    complete: function (result) {
+
+                        if (result.status == 200) {
+                            $('#preloader').hide();
+                        }
+
+                    },
+                });
+            }
+        });
+    });
+
+
+    $('#confirm-class-deletion').click(function () {
+        var delete_ids = '';
+        var total = 0;
+        if ($('input:checkbox:checked').length > 0) {
+
+            $('input:checkbox:checked').each(function (index, value) {
+                var sThisVal = $(this).val();
+                if ($(this).val() != 'on') {
+                    delete_ids += sThisVal + ',';
+                    total++;
+                }
+            });
+        }
+        delete_ids = delete_ids.substr(-delete_ids.length, delete_ids.length - 1);
+
+        if (total > 0) {
+            //onsole.log(delete_ids);
+            $.ajax({
+                type: "POST",
+                data: delete_ids,
+                url: '/users/classes/delete',
+                beforeSend: function () {
+                    // setting a timeout
+                    $('#preloader').show();
+                },
+                success: function (msg) {
+                    if (msg.status == 1) {
+                        //table.destroy();
+                        table.ajax.reload();
+
+                        $('#modalConfirmDelete').modal('hide');
+                        $('#successModel .heading').text('Successful');
+                        //success_txt
+                        $('#preloader').hide();
+                        $('#successModel').modal('show');
+
+                        $('#success_txt').html('<i class="fas fa-check fa-4x mb-3 animated rotateIn"></i><h2>' + msg.message + '</h2>');
+                        $('#successModel .modal-dialog').removeClass('modal-danger');
+                        $('#successModel .modal-dialog').addClass('modal-info');
+
+
+                    } else {
+                        $('#successModel .heading').text('Error');
+                        $('#success_txt').html('<i class="fas fa-close fa-4x mb-3 animated rotateIn"></i><h2>' + msg.message + '</h2>');
+                        $('#successModel .modal-dialog').removeClass('modal-info');
+                        $('#successModel .modal-dialog').addClass('modal-danger');
+                        //$('#successModel').addClass('show').css('display', 'inline');
+                        $('#successModel').modal('show');
+                    }
+                }
+            });
+        } else {
+            //no class selected for delete class
+            //$('.delete_msg').text("Please select any item");
+            console.log("hllso");
+        }
+
+    });
+
+
+</script>
+
+<script type="text/javascript" src="/demos/js/compiled.min.js?ver=4.6.1"></script>
+<script type="text/javascript" src="/demos/js/footer-functions.js?ver=4.6.1"></script>

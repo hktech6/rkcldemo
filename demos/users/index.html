@@ -453,10 +453,10 @@ input[disabled], button[disabled] {
 
   <footer style="text-align: center;">Dashboard + Video Conferencing + Chat + File Sharing</footer>
   <!--<script src="/routes/rooms.js"></script>-->
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    /*$.ajax({
-        url:"/demos/users",
+    $.ajax({
+        url:"/rountes/",
         
         success:function(result){
             console.log(result);
@@ -468,7 +468,7 @@ input[disabled], button[disabled] {
     setTimeout(function(){
          f = localStorage.getItem('name');
     console.log(f);
-    }, 3000);*/
+    }, 3000);
    
 // this object is used to get uniquie rooms based on this demo
 // i.e. only those rooms that are created on this page
@@ -505,7 +505,6 @@ function looper() {
 }
 
 function updateListOfRooms(rooms) {
-    
     $('#active-rooms').html(rooms.length);
 
     $('#rooms-list').html('');

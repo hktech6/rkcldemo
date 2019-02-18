@@ -1,0 +1,40 @@
+<form id="class_add" class="text-center" style="color: #757575;" method="post"> 
+    <select class="mdb-select" name="class_type">
+        <option value="normal">Canvas Tool + Chat</option>
+        <option value="canvas-stream">Canvas Tool + Chat + Canvas Stream</option>
+        <option value="screen-sharing" selected>Canvas Tool + Chat + Screen Sharing</option>
+    </select>
+
+    <!-- E-mail -->
+    <div class="md-form">
+        <input type="text" id="txt-roomid" name="class_id" class="form-control form-control-sm">                                         
+        <label for="txt-roomid" class="">Enter Room Id</label>
+    </div>
+
+    <!-- Name -->
+    <div class="md-form mt-3">
+        <input type="text" id="txt-user-name" name="user_name" class="form-control">
+        <label for="txt-user-name">Enter Your Name</label>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <!-- First name -->
+            <div class="md-form">
+                <input type="text" id="date-start" name="date_start" class="form-control">
+                <label for="date-start">Start From</label>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Last name -->
+            <div class="md-form">
+                <input type="text" id="date-end" name="date_end"  class="form-control">
+                <label for="date-end">End On</label>
+            </div>
+        </div>
+    </div>
+    <!-- Send button -->
+    <button class="btn btn-info waves-effect waves-light" type="submit">submit</button>
+
+    <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Cancel</a>
+</form>

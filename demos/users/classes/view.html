@@ -1,0 +1,431 @@
+
+<main class="pt-4">
+    <section id="mdb-panel-page-content">
+        <div class="card card-cascade narrower">
+
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                <a href="" class="white-text mx-3 text-center">Classe Name: {{class_data[0]['class_name']}}</a>                
+            </div>
+            <!-- Jumbotron-->
+            <div class="px-3">
+                <div class="row no-gutters">
+                    <div class="col-12 col-sm-4 col-md-5 px-3">
+                        <div class="jumbotron  p-5">
+                            
+                            <p><strong>Presenter: </strong>{{class_data[0]['presenter_name']}}</p>
+                            <p><strong>Start Time:</strong> {{class_data[0]['class_start_on'] |date('d/m/Y H:i A')}}</p>
+                            <p><strong>End Time: </strong>{{class_data[0]['class_end_on'] |date('d/m/Y H:i A')}}</p>
+                            <p><strong>Class Type:</strong> {{class_data[0]['class_type']}}</p>
+                            <p><strong>Status:</strong> {{class_data[0]['status']}}</p>
+
+
+                            <form>
+                                <div class="form-group">
+
+
+                                    <input type="hidden" value="{{class_data[0]['class_type']}}" id="demo-type">
+                                    <input type="hidden" value="{{class_data[0]['class_name']}}" class="form-control" id="txt-roomid">
+                                    <input type="hidden" value="{{class_data[0]['presenter_name']}}" class="form-control" id="txt-user-name">
+                                    <input type="checkbox" id="chk-hidden-room">
+
+                                    <p style="display: none;">
+                                        <label for="txt-room-password" class="col-form-label">Enter Room Password:</label>
+                                        <input type="text" class="form-control" id="txt-room-password">
+                                    </p>
+                                </div>
+                            </form>
+
+
+                            <a target="_blank" id="freebies-jumbotron-about" href="" class="btn btn-dtc btn-md btn-rounded waves-effect waves-light">Back</a>
+                            {% if user_data.role == '1' %}
+                           <a target="_blank" id="btn-create-room" href="" class="btn btn-ptc btn-md btn-rounded waves-effect waves-light">Start</a>
+                            {% else %}
+                                <a target="_blank" id="btn-create-room" href="" class="btn btn-ptc btn-md btn-rounded waves-effect waves-light">Join</a>
+                            {% endif %}
+                            
+                            <a target="_blank" id="freebies-jumbotron-tutorial" href="" class="btn btn-stc btn-md btn-rounded waves-effect waves-light">End</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7 px-3">
+                        <div class="table-wrapper">
+                            <table  id="" class="table table-striped table-hover dt-responsive display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+
+
+                                        <th>Owner ID</th>
+                                        <th>Session</th>
+
+                                        <th>Participants</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="rooms-list"><tr><td colspan=9>No active room found for this demo.</td></tr></tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- /.Jumbotron-->
+        </div>
+    </section>
+</main>
+<script src="/demos/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/dist/RTCMultiConnection.min.js"></script>
+
+<script>
+    /*$.ajax({
+     url:"/demos/users",
+     
+     success:function(result){
+     console.log(result);
+     }
+     });
+     
+     var x = document.cookie;
+     console.log(x);
+     setTimeout(function(){
+     f = localStorage.getItem('name');
+     console.log(f);
+     }, 3000);*/
+
+// this object is used to get uniquie rooms based on this demo
+// i.e. only those rooms that are created on this page
+    var publicRoomIdentifier = 'dashboard';
+//var login =  login();
+//console.log(login);
+    var connection = new RTCMultiConnection();
+
+    connection.socketURL = '/';
+// connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+
+/// make this room public
+    connection.publicRoomIdentifier = publicRoomIdentifier;
+    connection.socketMessageEvent = publicRoomIdentifier;
+
+// keep room opened even if owner leaves
+    connection.autoCloseEntireSession = true;
+
+    connection.connectSocket(function (socket) {
+
+        looper();
+
+        socket.on('disconnect', function () {
+            location.reload();
+        });
+    });
+
+    function looper() {
+
+        //if (!$('#rooms-list').length)
+        //return;
+        connection.socket.emit('get-public-rooms', publicRoomIdentifier, function (listOfRooms) {
+
+            if (listOfRooms.length > 0) {
+                updateListOfRooms(listOfRooms);
+            } else {
+                $('#rooms-list').html('');
+            }
+
+            setTimeout(looper, 3000);
+        });
+    }
+
+    function updateListOfRooms(rooms) {
+        $('#active-rooms').html(rooms.length);
+        console.log('hello');
+        $('#rooms-list').html('');
+
+        if (!rooms.length) {
+            $('#rooms-list').html('<tr><td colspan=9>No active room found for this demo.</td></tr>');
+            return;
+        }
+
+        rooms.forEach(function (room, idx) {
+            var tr = document.createElement('tr');
+            var html = '';
+            if (!room.isPasswordProtected) {
+                // html += '<td>' + (idx + 1) + '</td>';
+            } else {
+                // html += '<td>' + (idx + 1) + ' <img src="https://webrtcweb.com/password-protected.png" style="height: 15px; vertical-align: middle;" title="Password Protected Room"></td>';
+            }
+
+            // html += '<td><span class="max-width" title="' + room.sessionid + '">' + room.sessionid + '</span></td>';
+            html += '<td><span class="max-width" title="' + room.owner + '">' + room.owner + '</span></td>';
+
+            html += '<td>';
+            Object.keys(room.session || {}).forEach(function (key) {
+                html += '<pre><b>' + key + ':</b> ' + room.session[key] + '</pre>';
+            });
+            html += '</td>';
+
+            //html += '<td><span class="max-width" title="' + JSON.stringify(room.extra || {}).replace(/"/g, '`') + '">' + JSON.stringify(room.extra || {}) + '</span></td>';
+
+            html += '<td>';
+            room.participants.forEach(function (pid) {
+                html += '<span class="userinfo"><span class="max-width" title="' + pid + '">' + pid + '</span></span><br>';
+            });
+            html += '</td>';
+
+            // check if room is full
+            if (room.isRoomFull) {
+                // room.participants.length >= room.maxParticipantsAllowed
+                // html += '<td><span style="border-bottom: 1px dotted red; color: red;">Room is full</span></td>';
+            } else {
+                // html += '<td><button class="btn join-room" data-roomid="' + room.sessionid + '" data-password-protected="' + (room.isPasswordProtected === true ? 'true' : 'false') + '">Join</button></td>';
+            }
+
+            $(tr).html(html);
+            $('#rooms-list').append(tr);
+
+            $(tr).find('.join-room').click(function () {
+                $(tr).find('.join-room').prop('disabled', true);
+
+                var roomid = $(this).attr('data-roomid');
+                $('#txt-roomid-hidden').val(roomid);
+
+                $('#btn-show-join-hidden-room').click();
+
+                if ($(this).attr('data-password-protected') === 'true') {
+                    $('#txt-room-password-hidden').parent().show();
+                } else {
+                    $('#txt-room-password-hidden').parent().hide();
+                }
+
+                $(tr).find('.join-room').prop('disabled', false);
+            });
+        });
+    }
+
+    $('#btn-show-join-hidden-room').click(function (e) {
+        e.preventDefault();
+        $('#txt-room-password-hidden').parent().hide();
+        $('#joinRoomModel').modal('show');
+    });
+
+    $('#btn-join-hidden-room').click(function () {
+        var roomid = $('#txt-roomid-hidden').val().toString();
+
+        if (!roomid || !roomid.replace(/ /g, '').length) {
+            alertBox('Please enter room-id.', 'Room ID Is Required');
+            return;
+        }
+
+        var fullName = $('#txt-user-name-hidden').val().toString();
+
+        if (!fullName || !fullName.replace(/ /g, '').length) {
+            alertBox('Please enter your name.', 'Your Name Is Required');
+            return;
+        }
+
+        connection.extra.userFullName = fullName;
+
+
+
+        if ($('#txt-room-password-hidden').parent().css('display') !== 'none') {
+
+            var roomPassword = $('#txt-room-password-hidden').val().toString();
+            console.log(roomPassword);
+            if (!roomPassword || !roomPassword.replace(/ /g, '').length) {
+                alertBox('Please enter room password.', 'Password Box Is Empty');
+                return;
+            }
+            connection.password = roomPassword;
+
+            connection.socket.emit('is-valid-password', connection.password, roomid, function (isValidPassword, roomid, error) {
+                if (isValidPassword === true) {
+                    joinAHiddenRoom(roomid);
+                } else {
+                    alertBox(error, 'Password Issue');
+                }
+            });
+            return;
+        }
+
+
+        joinAHiddenRoom(roomid);
+    });
+
+    function joinAHiddenRoom(roomid) {
+        var initialHTML = $('#btn-join-hidden-room').html();
+
+        $('#btn-join-hidden-room').html('Please wait...').prop('disabled', true);
+
+        connection.checkPresence(roomid, function (isRoomExist) {
+            if (isRoomExist === false) {
+                alertBox('No such room exist on this server. Room-id: ' + roomid, 'Room Not Found');
+                $('#btn-join-hidden-room').html(initialHTML).prop('disabled', false);
+                return;
+            }
+
+            connection.sessionid = roomid;
+            connection.isInitiator = false;
+            $('#joinRoomModel').modal('hide');
+            openCanvasDesigner();
+
+            $('#btn-join-hidden-room').html(initialHTML).prop('disabled', false);
+        })
+    }
+
+    function openCanvasDesigner() {
+        $('#startRoomModel').modal('hide');
+
+        // var href = location.href + 'canvas-designer.html?open=' + connection.isInitiator + '&sessionid=' + connection.sessionid + '&publicRoomIdentifier=' + connection.publicRoomIdentifier + '&userFullName=' + connection.extra.userFullName;
+        var href = '/../demos/dashboard/canvas-designer.html?open=' + connection.isInitiator + '&sessionid=' + connection.sessionid + '&publicRoomIdentifier=' + connection.publicRoomIdentifier + '&userFullName=' + connection.extra.userFullName;
+
+        if (!!connection.password) {
+            href += '&password=' + connection.password;
+        }
+
+        href += '&demoType=' + $('#demo-type').val();
+
+        var newWin = window.open(href);
+        if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') {
+            var html = '';
+            html += '<p>Please click following link:</p>';
+            html += '<p><a href="' + href + '" target="_blank">';
+            if (connection.isInitiator) {
+                html += 'Click To Open The Room';
+            } else {
+                html += 'Click To Join The Room';
+            }
+            html += '</a></p>';
+            alertBox(html, 'Popups Are Blocked');
+        }
+    }
+
+    function alertBox(message, title, specialMessage, callback) {
+        callback = callback || function () {};
+
+        $('.btn-alert-close').unbind('click').bind('click', function (e) {
+            e.preventDefault();
+            $('#alert-box').modal('hide');
+            $('#confirm-box-topper').hide();
+
+            callback();
+        });
+
+        $('#alert-title').html(title || 'Alert');
+        $('#alert-special').html(specialMessage || '');
+        $('#alert-message').html(message);
+        $('#confirm-box-topper').show();
+
+        $('#alert-box').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
+    function confirmBox(message, callback) {
+        $('#btn-confirm-action').html('Confirm').unbind('click').bind('click', function (e) {
+            e.preventDefault();
+            $('#confirm-box').modal('hide');
+            $('#confirm-box-topper').hide();
+            callback(true);
+        });
+
+        $('#btn-confirm-close').html('Cancel');
+
+        $('.btn-confirm-close').unbind('click').bind('click', function (e) {
+            e.preventDefault();
+            $('#confirm-box').modal('hide');
+            $('#confirm-box-topper').hide();
+            callback(false);
+        });
+
+        $('#confirm-message').html(message);
+        $('#confirm-title').html('Please Confirm');
+        $('#confirm-box-topper').show();
+
+        $('#confirm-box').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
+    $('#btn-create-room').click(function () {
+        var roomid = $('#txt-roomid').val().toString();
+        if (!roomid || !roomid.replace(/ /g, '').length) {
+            alertBox('Please enter room-id.', 'Room ID Is Required');
+            return;
+        }
+
+        var fullName = $('#txt-user-name').val().toString();
+        if (!fullName || !fullName.replace(/ /g, '').length) {
+            alertBox('Please enter your name.', 'Your Name Is Required');
+            return;
+        }
+
+        connection.extra.userFullName = fullName;
+
+        if ($('#chk-room-password').prop('checked') === true) {
+            var roomPassword = $('#txt-room-password').val().toString();
+            if (!roomPassword || !roomPassword.replace(/ /g, '').length) {
+                alertBox('Please enter room password.', 'Password Box Is Empty');
+                return;
+            }
+
+            connection.password = roomPassword;
+        }
+
+        var initialHTML = $('#btn-create-room').html();
+
+        $('#btn-create-room').html('Please wait...').prop('disabled', true);
+
+        connection.checkPresence(roomid, function (isRoomExist) {
+            if (isRoomExist === true) {
+                alertBox('This room-id is already taken and room is active. Please join instead.', 'Room ID In Use');
+                return;
+            }
+
+            if ($('#chk-hidden-room').prop('checked') === true) {
+                // either make it unique!
+                // connection.publicRoomIdentifier = connection.token() + connection.token();
+
+                // or set an empty value (recommended)
+                connection.publicRoomIdentifier = '';
+            }
+
+            connection.sessionid = roomid;
+            connection.isInitiator = true;
+            openCanvasDesigner();
+            $('#btn-create-room').html(initialHTML).prop('disabled', false);
+        });
+
+        console.log(initialHTML);
+        return false;
+    });
+
+    $('#chk-room-password').change(function () {
+        $('#txt-room-password').parent().css('display', this.checked === true ? 'block' : 'none');
+        $('#txt-room-password').focus();
+    });
+
+    var txtRoomId = document.getElementById('txt-roomid');
+
+    txtRoomId.onkeyup = txtRoomId.onblur = txtRoomId.oninput = txtRoomId.onpaste = function () {
+        localStorage.setItem('canvas-designer-roomid', txtRoomId.value);
+    };
+
+    if (localStorage.getItem('canvas-designer-roomid')) {
+        txtRoomId.value = localStorage.getItem('canvas-designer-roomid');
+        $('#txt-roomid-hidden').val(txtRoomId.value);
+    }
+
+    var userFullName = document.getElementById('txt-user-name');
+
+    userFullName.onkeyup = userFullName.onblur = userFullName.oninput = userFullName.onpaste = function () {
+        localStorage.setItem('canvas-designer-user-full-name', userFullName.value);
+    };
+
+    if (localStorage.getItem('canvas-designer-user-full-name')) {
+        userFullName.value = localStorage.getItem('canvas-designer-user-full-name');
+        $('#txt-user-name-hidden').val(userFullName.value);
+    }
+</script>

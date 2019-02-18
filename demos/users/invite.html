@@ -1,0 +1,364 @@
+
+<!--Main layout-->
+<main class="pt-4">
+    <!--Section: Page content-->
+    <section id="mdb-panel-page-content">
+        <!-- Table with panel -->
+        <div class="card card-cascade narrower">
+            <!--Card image-->
+            <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+                <div>
+                    <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                        <i class="fas fa-th-large mt-0"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                        <i class="fas fa-columns mt-0"></i>
+                    </button>
+                </div>
+
+                <a href="" class="white-text mx-3">Invites</a>
+
+                <div>
+                    <button type="button"  class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#modalInvite">
+                        <i class="fas fa-user-plus mt-0" data-toggle="tooltip" data-placement="top" title="Invite"></i>
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- class add model start-->
+            <div class="modal fade" id="modalInvite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                        <div id="preloader" class="checkout-preloader-container" style="display: none;">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer spinner-blue-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Material form contact -->
+                        <div class="card">
+
+                            <h5 class="card-header info-color white-text text-center py-4">
+                                <strong>Invite Attendees</strong>
+                            </h5>
+                            <!--Card content-->
+                            <div class="card-body px-lg-5 pt-0">
+
+                                <!-- Form -->
+                                <form id="invite_send" class="text-center" style="color: #757575;" method="post"> 
+
+                                    <select class="mdb-select md-form" name="invite_class" id="classes_list">
+
+                                    </select>
+
+                                    <div id="selected_ids"></div>
+
+                                    <!-- Send button -->
+                                    <button class="btn btn-info waves-effect waves-light" type="submit">Invite</button>
+
+                                    <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Cancel</a>
+                                </form>
+                                <!-- Form -->
+                            </div>
+
+                        </div>
+                        <!-- Material form contact -->
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
+            <!-- class add model end-->
+
+            <div class="px-3">              
+
+                <div class="table-wrapper">
+                    <!--Table-->
+                    <table  id="dtMaterialDesignExample" class="table table-striped table-hover dt-responsive display nowrap" cellspacing="0" width="100%">
+
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input class="form-check-input selectAll" type="checkbox"  id="checkbox">
+                                    <label class="form-check-label" for="checkbox"> </label>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript://">Name                                             
+                                    </a>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript://">User Name                                              
+                                    </a>
+                                </th>
+                                <th class="th">
+                                    <a href="javascript://">Email
+                                    </a>
+                                </th>
+                                <th class="th">
+                                    <a href="javascript://">Mobile                                                
+                                    </a>
+                                </th>                                
+                                <th class="th-lg">
+                                    <a href="javascript://">Action
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+
+                        <!--Table body-->
+                        <tbody>
+                            <tr >
+                                <td scope="row"></td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>                                
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Central Modal Medium Info -->
+        <div class="modal fade" id="successModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-notify modal-info" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p class="heading lead"></p>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="text-center" id="success_txt">
+
+                        </div>
+                    </div>                    
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Central Modal Medium Info-->
+        <!--edit class end-->
+
+        <!-- Table with panel -->
+
+    </section>
+    <!--Section: Page content-->
+</main>
+
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="/demos/js/datatables.min.js"></script>
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
+<link rel="stylesheet" href="http://cdn.datatables.net/responsive/1.0.2/css/dataTables.responsive.css"/>
+
+<script src="/demos/js/mdb.min.js"></script>
+<link href="/demos/css/datatables.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/demos/css/bootstrap-material-datetimepicker.css" />
+
+<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+
+<script type="text/javascript" src="/demos/js/bootstrap-material-datetimepicker.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<!--<script src="/demos/js/bootstrap.min.js"></script>-->
+
+<script>
+    $(document).ready(function () {
+        $("#modalInvite").on('show.bs.modal', function () {
+            $('#preloader').show();
+            var invite_ids = '';
+            $(".invite_ids").each(function () {
+                if ($(this).is(':checked')) {
+                    invite_ids += $(this).val() + ',';
+                }
+            });
+            invite_ids = invite_ids.substring(0, invite_ids.length - 1);
+            $('#selected_ids').html('');
+            $('#selected_ids').html('<input type="hidden" name="invite_send" value="' + invite_ids + '">');
+
+            $.get("/users/classes/list", function (result) {
+                // $('#classes_list')
+                result = JSON.parse(result);
+                $('#preloader').hide();
+                console.log(result.data);
+                var options = '';
+                $.each(result.data, function (index, value) {
+                    if (value[5] == 'Active') {
+                        options += '<option value="' + value[0] + '">' + value[1] + '</option>';
+                    }
+
+                });
+
+                $('#classes_list').html(options);
+            });
+        });
+    });
+
+
+    $(".selectAll").on("click", function () {
+        if ($(this).is(':checked')) {
+            $("input:checkbox").prop('checked', true);
+        } else {
+            $("input:checkbox").prop('checked', false);
+        }
+    });
+
+    var table = $('#dtMaterialDesignExample').DataTable({
+        "ajax": '/users/invite/list/',
+        responsive: true,
+        searching: true,
+        'columnDefs': [{
+                'targets': 0,
+                'render': function (data, type, full, meta) {
+                    //console.log(full);
+                    chk = ' <input class="form-check-input invite_ids" value="' + data + '" type="checkbox" name="select_class_ids[]" id="checkbox_' + data + '">';
+                    chk += '<label class="form-check-label" for="checkbox_' + data + '" class="label-table"></label>';
+                    return chk;
+                }
+            },
+            {
+                'targets': 5,
+                'searchable': false,
+                'orderable': false,
+                'render': function (data, type, full, meta) {
+                    var all_data = full.toString();
+                    btn = '<button  class="btn btn-outline-info btn-rounded btn-sm px-2 waves-effect waves-light">Invite';
+                    btn += '</button>';
+                    btn += '</button>';
+                    return btn;
+                }
+            }
+        ],
+    });
+
+    $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+        $(this).parent().append($(this).children());
+    });
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+        $('#dtMaterialDesignExample_filter input').attr("placeholder", "Search");
+        $('input').removeClass('form-control-sm');
+    });
+    $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+    $('#dtMaterialDesignExample_wrapper select').removeClass(
+            'custom-select custom-select-sm form-control form-control-sm');
+    $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+    $('#dtMaterialDesignExample_wrapper .mdb-select,.mdb-select').materialSelect();
+    $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+
+
+    $.validator.setDefaults({
+        submitHandler: function () {
+            alert("submitted!");
+        }
+    });
+
+    $('#invite_send').validate({
+        rules: {
+        },
+        messages: {
+
+        },
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            // Add the `help-block` class to the error element
+            error.addClass("help-block");
+            if (element.prop("type") === "checkbox") {
+                error.insertAfter(element.parent("label"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+
+        submitHandler: function (form) {
+
+            var formData = $(form).serializeArray();
+
+            var invite_send = $('input[name=invite_send]').val();
+            //var formData = {'user_ids': invite_send, 'class_id': $('#classes_list').val()};
+            if (invite_send.length < 1) {
+                alert("Please select any user");
+                return false;
+            }
+            url = '/users/invite';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData, // JSON.stringify(data),
+                beforeSend: function () {
+                    // setting a timeout
+                    $('#preloader').show();
+                },
+                success: function (msg) {
+
+                    if (msg.status == 1) {
+                        $('#modalInvite').modal('hide');
+                            
+                        $('#successModel .heading').text('Successful');
+                        //success_txt
+                        $('#preloader').hide();
+                        $('#successModel').modal('show');
+                        $('#preloader').hide();
+                        $('#success_txt').html('<i class="fas fa-check fa-4x mb-3 animated rotateIn"></i><h2>' + msg.message + '</h2>');
+                        $('#successModel .modal-dialog').removeClass('modal-danger');
+                        $('#successModel .modal-dialog').addClass('modal-info');
+                        //  table.destroy();
+                        table.ajax.reload();
+                    } else {
+
+                        $('#successModel .heading').text('Error');
+                        $('#success_txt').html('<i class="fas fa-close fa-4x mb-3 animated rotateIn"></i><h2>' + msg.message + '</h2>');
+                        $('#successModel .modal-dialog').removeClass('modal-info');
+                        $('#successModel .modal-dialog').addClass('modal-danger');
+
+                        $('#successModel').modal('show');
+                    }
+                },
+                error: function (xhr) { // if error occured
+                    alert("Error occured.please try again");
+                    $('#preloader').hide();
+                },
+                complete: function (result) {
+
+                    if (result.status == 200) {
+                        $('#preloader').hide();
+                    }
+
+                },
+            });
+        }
+    });
+
+</script>
+
+<script type="text/javascript" src="/demos/js/compiled.min.js?ver=4.6.1"></script>
+<script type="text/javascript" src="/demos/js/footer-functions.js?ver=4.6.1"></script>

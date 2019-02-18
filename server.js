@@ -1,6 +1,17 @@
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
+var express = require('express');
+var cons = require('consolidate');
+var cookieParser = require('cookie-parser'); // module for parsing cookies
+var app = express();
+app.use(cookieParser());
+var users = require('./controllers/user-controller.js');
+var auth = require('./controllers/authenticate-controller.js');
+var sessionstorage = require('sessionstorage');
+//app.set('views', __dirname + '/app/server/views');
+//app.set('view engine', 'html');
+//console.log(__dirname);
 //var app = require('./app');
 //var Connection = require('Connection');
 
@@ -18,16 +29,444 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
 //        MongoClient.connect(mongo_url, function(err, db) {
 //          console.log("test user");
 //        });
+            console.log(request.url);
+        if (request.url == '/users/logout') {
+            logout = users.logOut();
+            console.log("ss");
+            response.writeHead(302, {
+                'Location': '/users/login'
+            });
+            response.end();
+            return;
+        }
+        if (request.url == '/demos/users/list') {
+
+            mdata = rooms.getUsersList();
+
+//            response.writeHead(200, {
+//                 'Content-Type': 'text/plain'
+            //});
+            mdata = JSON.stringify(mdata);
+            response.write(mdata, 'binary');
+            response.end();
+            return;
+
+        }
+
+        if (request.url == '/users/register') {
+            response.writeHead(200, {
+                'Content-Type': "application/json; charset=utf-8"
+            });
+
+            authdata = auth.register(request, function (data) {
+
+                authdata = JSON.stringify(data);
+                response.write(authdata, 'binary');
+                response.end();
+            });
+            return;
+        }
+
+        if (request.url == '/users/editprofile') {
+            response.writeHead(200, {
+                'Content-Type': "application/json; charset=utf-8"
+            });
+
+            profile = users.edit_profile(request, function (data) {
+                profile_data = JSON.stringify(data);
+                response.write(profile_data, 'binary');
+                response.end();
+            });
+            return;
+        }
+        if (request.url == '/users/update_class') {
+            response.writeHead(200, {
+                'Content-Type': "application/json; charset=utf-8"
+            });
+
+            users.updateClass(request, function (data) {
+                update_data = JSON.stringify(data);
+                response.write(update_data, 'binary');
+                response.end();
+            });
+            return;
+        }
+        if (request.url == '/users/changepassword') {
+            response.writeHead(200, {
+                'Content-Type': "application/json; charset=utf-8"
+            });
+
+            users.changepassword(request, function (data) {
+                pass_data = JSON.stringify(data);
+                response.write(pass_data, 'binary');
+                response.end();
+            });
+            return;
+        }
 
         try {
             if (!config.dirPath || !config.dirPath.length) {
                 config.dirPath = null;
             }
 
-
             uri = url.parse(request.url).pathname;
 
             filename = path.join(config.dirPath ? resolveURL(config.dirPath) : process.cwd(), uri);
+
+            if (request.url == '/demos/users') {
+
+                // filename = filename.replace(resolveURL('/demos'), '');
+                filename += resolveURL('/register.html');
+
+                fs.readFile(filename, 'binary', function (err, file) {
+                    if (err) {
+                        response.writeHead(500, {
+                            'Content-Type': 'text/plain'
+                        });
+                        response.write('404 Not Found: ' + path.join('/', uri) + '\n');
+                        response.end();
+                        return;
+                    }
+
+                    response.writeHead(200, {
+                        'Content-Type': 'text/html'
+                    });
+                    response.write(file, 'binary');
+                    response.end();
+                    return;
+                });
+                return;
+            }
+
+            if (request.url == '/users/login') {
+
+            console.log("hel");
+                if (sessionstorage.getItem('users') != null) {
+
+                    response.writeHead(302, {
+                        'Location': '/users/profile'
+                    });
+                    response.end();
+                    return;
+                }
+
+                if (request.method == 'POST') {
+                    response.writeHead(200, {
+                        'Content-Type': "application/json; charset=utf-8"
+                    });
+
+                    login = auth.login(request, function (data) {
+                        authdata = JSON.stringify(data);
+                        response.write(authdata, 'binary');
+                        response.end();
+                    });
+                    return;
+                } else {
+
+                    filename = filename.replace(resolveURL('/users/login'), '');
+                    filename += resolveURL('/demos/users/login.html');
+
+                    fs.readFile(filename, 'binary', function (err, file) {
+                        if (err) {
+                            response.writeHead(500, {
+                                'Content-Type': 'text/plain'
+                            });
+                            response.write('404 Not Found: ' + path.join('/', uri) + '\n');
+                            response.end();
+                            return;
+                        }
+
+                        response.writeHead(200, {
+                            'Content-Type': 'text/html'
+                        });
+                        response.write(file, 'binary');
+                        response.end();
+                        return;
+                    });
+                    return;
+                }
+            }
+
+            if (request.url == '/users/attendees') {
+
+                if (request.method == 'POST') {
+                    response.writeHead(200, {
+                        'Content-Type': "application/json; charset=utf-8"
+                    });
+
+                    attendees = users.attendees(request, function (data) {
+                        attendeesdata = JSON.stringify(data);
+                        response.write(attendeesdata, 'binary');
+                        response.end();
+                    });
+                    return;
+                } else {
+
+                    filename = filename.replace(resolveURL('/users/attendees'), '');
+                    filename += resolveURL('/demos/users/attendees.html');
+
+                    fs.readFile(filename, 'binary', function (err, file) {
+                        if (err) {
+                            response.writeHead(500, {
+                                'Content-Type': 'text/plain'
+                            });
+                            response.write('404 Not Found: ' + path.join('/', uri) + '\n');
+                            response.end();
+                            return;
+                        }
+
+                        response.writeHead(200, {
+                            'Content-Type': 'text/html'
+                        });
+                        response.write(file, 'binary');
+                        response.end();
+                        return;
+                    });
+                    return;
+                }
+            }
+
+            if (request.url == '/users/classes/delete') {
+
+                if (request.method == 'POST') {
+                    response.writeHead(200, {
+                        'Content-Type': "application/json; charset=utf-8"
+                    });
+
+                    users.deleteClasses(request, function (data) {
+
+                        classesdata = JSON.stringify(data);
+                        response.write(classesdata, 'binary');
+                        response.end();
+                    });
+                    return;
+                }
+            }
+
+            if (request.url.indexOf("classes/list") > -1) {
+                if (sessionstorage.getItem('users').role == 1) {
+                    users.getClassListByPresenter(function (class_data) {
+                        classesdata = JSON.stringify(class_data);
+                        response.write(classesdata, 'binary');
+                        response.end();
+                        return;
+                    });
+                } else {
+                    users.getClassListByLearner(function (class_data) {
+                        classesdata = JSON.stringify(class_data);
+                        response.write(classesdata, 'binary');
+                        response.end();
+                        return;
+                    });
+                }
+
+                return;
+            }
+
+
+            if (request.url == '/users/classes') {
+
+                if (request.method == 'POST') {
+                    response.writeHead(200, {
+                        'Content-Type': "application/json; charset=utf-8"
+                    });
+
+                    users.addClasses(request, function (data) {
+                        console.log(data);
+                        classesdata = JSON.stringify(data);
+                        console.log(classesdata);
+                        response.write(classesdata, 'binary');
+                        response.end();
+                    });
+                    return;
+                } else {
+
+                    filename = filename.replace(resolveURL('/users/classes'), '');
+                    header_file = resolveURL(filename + '/demos/users/header.html');
+                    filename += resolveURL('/demos/users/classes.html');
+
+                    cons.swig(filename, {user_role: sessionstorage.getItem('users').role}, function (err, file) {
+                        //fs.readFile(filename, 'binary', function (err, file) {
+                            var file_html = file;
+                            fs.readFile(header_file, 'binary', function (err, html) {
+                                html += file_html;
+                                response.writeHead(200, {
+                                    'Content-Type': 'text/html'
+                                });
+                                response.write(html, 'binary');
+                                response.end();
+                                return;
+                            });
+                       // });
+                    });
+
+
+                    return;
+                }
+            }
+
+            if (request.url.indexOf("invite/list") > -1) {
+                users.getLearnersList(function (class_data) {
+                    classesdata = JSON.stringify(class_data);
+                    response.write(classesdata, 'binary');
+                    response.end();
+                    return;
+                });
+                return;
+            }
+
+            if (request.url.indexOf("classes/view") > -1) {
+                qstring = request.url.split('view?id=');
+                var class_id = qstring[1];
+                var filename = filename.replace(resolveURL('/users/classes/view'), '');
+                var header_file = resolveURL(filename + '/demos/users/header.html');
+                filename += resolveURL('/demos/users/classes/view.html');
+
+                users.getClassById(class_id, function (class_data) {
+                    
+                    cons.swig(filename, {class_data: class_data,'user_data' : sessionstorage.getItem('users')}, function (err, file) {
+                        if (err) {
+                            response.writeHead(500, {
+                                'Content-Type': 'text/plain'
+                            });
+                            response.write('404 Not Found: ' + path.join('/', uri) + '\n');
+                            response.end();
+                            return;
+                        }
+
+                        var file_html = file;
+                        fs.readFile(header_file, 'binary', function (err, html) {
+                            html += file_html;
+                            response.writeHead(200, {
+                                'Content-Type': 'text/html'
+                            });
+                            response.write(html, 'binary');
+                            response.end();
+                            return;
+                        });
+
+
+//                        response.write(html, 'binary');
+//                        response.end();
+//                        return;
+                    });
+                });
+
+
+                /*fs.readFile(filename, 'binary', function (err, file) {
+                 var file_html = file;
+                 fs.readFile(header_file, 'binary', function (err, html) {
+                 html += file_html;
+                 response.writeHead(200, {
+                 'Content-Type': 'text/html'
+                 });
+                 response.write(html, 'binary');
+                 response.end();
+                 return;
+                 });
+                 });*/
+
+                return;
+            }
+
+            if (request.url == '/users/invite') {
+
+                if (request.method == 'POST') {
+                    response.writeHead(200, {
+                        'Content-Type': "application/json; charset=utf-8"
+                    });
+
+                    users.sendInvites(request, function (data) {
+                        // console.log(data);
+                        classesdata = JSON.stringify(data);
+                        //console.log(classesdata);
+                        response.write(classesdata, 'binary');
+                        response.end();
+                    });
+                    return;
+                } else {
+
+                    filename = filename.replace(resolveURL('/users/invite'), '');
+                    header_file = resolveURL(filename + '/demos/users/header.html');
+                    filename += resolveURL('/demos/users/invite.html');
+
+                    fs.readFile(filename, 'binary', function (err, file) {
+                        var file_html = file;
+                        fs.readFile(header_file, 'binary', function (err, html) {
+                            html += file_html;
+                            response.writeHead(200, {
+                                'Content-Type': 'text/html'
+                            });
+                            response.write(html, 'binary');
+                            response.end();
+                            return;
+                        });
+                    });
+
+                    return;
+                }
+            }
+
+            if (request.url == '/users/profile/setting') {
+                filename = filename.replace(resolveURL('/users/profile/setting'), '');
+                // filename = filename.replace(resolveURL('/demos'), '');
+
+                filename += resolveURL('/demos/users/profile_edit.html');
+
+                users.getUserData(function (userdata) {
+
+                    cons.swig(filename, {user: userdata.data}, function (err, html) {
+                        if (err) {
+                            response.writeHead(500, {
+                                'Content-Type': 'text/plain'
+                            });
+                            response.write('404 Not Found: ' + path.join('/', uri) + '\n');
+                            response.end();
+                            return;
+                        }
+
+                        response.writeHead(200, {
+                            'Content-Type': 'text/html'
+                        });
+                        response.write(html, 'binary');
+                        response.end();
+                        return;
+                    });
+                });
+
+                return;
+            }
+
+            if (request.url == '/users/profile') {
+
+                filename = filename.replace(resolveURL('/users/profile'), '');
+
+                filename += resolveURL('/demos/users/profile.html');
+
+                users.getUserData(function (userdata) {
+
+                    cons.swig(filename, {user: userdata.data}, function (err, html) {
+                        if (err) {
+                            response.writeHead(500, {
+                                'Content-Type': 'text/plain'
+                            });
+                            response.write('404 Not Found: ' + path.join('/', uri) + '\n');
+                            response.end();
+                            return;
+                        }
+
+                        response.writeHead(200, {
+                            'Content-Type': 'text/html'
+                        });
+                        response.write(html, 'binary');
+                        response.end();
+                        return;
+                    });
+                });
+
+                return;
+            }
+
 
         } catch (e) {
             pushLogs(root, 'url.parse', e);
@@ -63,7 +502,7 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
         }
 
         var matched = false;
-        ['/demos/', '/dev/', '/dist/', 'connection', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function (item) {
+        ['/demos/', '/dev/', '/dist/', '/routes/', 'connection', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function (item) {
             if (filename.indexOf(resolveURL(item)) !== -1) {
                 matched = true;
             }
@@ -106,6 +545,7 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
             stats = fs.lstatSync(filename);
 
             if (filename.search(/demos/g) === -1 && filename.search(/admin/g) === -1 && stats.isDirectory() && config.homePage === '/demos/index.html') {
+
                 if (response.redirect) {
 
                     response.redirect('/demos/');
@@ -119,9 +559,11 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
                 return;
             }
         } catch (e) {
+
             response.writeHead(404, {
                 'Content-Type': 'text/plain'
             });
+
             response.write('404 Not Found: ' + path.join('/', uri) + '\n');
             response.end();
             return;
@@ -129,11 +571,12 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
 
         try {
 
+
             if (fs.statSync(filename).isDirectory()) {
                 response.writeHead(404, {
                     'Content-Type': 'text/html'
                 });
-                console.log("dfdsf");
+
 
                 if (filename.indexOf(resolveURL('/demos/MultiRTC/')) !== -1) {
                     filename = filename.replace(resolveURL('/demos/MultiRTC/'), '');
@@ -152,8 +595,10 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
                     filename = filename.replace(resolveURL('/demos'), '');
                     filename += resolveURL('/demos/index.html');
                 } else {
+
                     filename += resolveURL(config.homePage);
                 }
+
             }
         } catch (e) {
             pushLogs(root, 'statSync.isDirectory', e);
@@ -171,9 +616,7 @@ require('rtcmulticonnection-server')(null, function (request, response, config, 
         }
         if (filename.indexOf(resolveURL('/demos/dashboard/')) !== -1) {
             //filename = filename.replace(resolveURL('/demos/dashboard/'), '');
-            filenames = resolveURL('/demos/dashboard/header.html');
-            console.log(filenames);
-            console.log(filename);
+
         }
         fs.readFile(filename, 'binary', function (err, file) {
             if (err) {

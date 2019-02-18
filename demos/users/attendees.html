@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="theme-color" content="#33b5e5">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link href="/demos/css/compiled-4.6.1.css" rel="stylesheet">
+
+
+
+    </head>
+    <body class="fixed-sn mdb-skin-custom " data-spy="scroll" data-target="#scrollspy" data-offset="15" aria-busy="true">
+        <header>
+            <!-- Sidebar navigation -->
+            <div id="slide-out" class="side-nav sn-bg-4 mdb-sidenav fixed" style="transform: translateX(-100%);">
+                <ul class="custom-scrollbar list-unstyled ps ps--theme_default ps--active-y" style="max-height:100vh;" data-ps-id="cce8cd94-9009-61e9-f166-92b373a900a8">
+                    <!-- Logo -->
+                    <li class="logo-sn d-block waves-effect">
+                        <div class="text-center">
+                            <a class="pl-0" href="#">
+                                Virtual Classroom
+                            </a>
+                        </div>
+                    </li>
+                    <!--/. Logo -->
+                    <!--Search Form-->
+                    <li>
+                        <form class="search-form" onkeypress="return event.keyCode != 13;" role="search" method="GET" autocomplete="off">
+                            <div class="form-group md-form mt-0 d-block waves-light waves-effect waves-light">
+                                <input type="text" class="form-control pb-1 mb-0" name="mdw_serach" placeholder="Search" id="mdb_main_search" style="height: 1.8rem;">
+                                <label for="mdb_main_search" class="sr-only active">Search</label>
+                            </div>
+                            <div class="dropdown-wrapper"></div>
+                        </form>
+                    </li>
+                    <!--/.Search Form-->
+                    <!-- Side navigation links -->
+
+                    <li>
+                        <ul id="side-menu" class="collapsible collapsible-accordion"><li id="menu-item-44502" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-44502"><a class="collapsible-header waves-effect" id="link-menu-item-44502" href="#"><i class="far fa-gem"></i>Rkcl</a></li>
+                            <li id="menu-item-59439" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-59439"><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-users"></i>Attendees</a>
+                            <li id="menu-item-594329" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-59439"><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chalkboard-teacher"></i>Classes</a>
+                            <li id="menu-item-594329" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-59439"><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-download"></i>Attendees<i class="fa fa-angle-down rotate-icon"></i></a>
+                                <div class="collapsible-body">
+                                    <ul class="sub-menu">
+                                        <li id="menu-item-59452" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home  menu-item-59452"><a class="collapsible-header waves-effect" id="link-menu-item-59452" href="https://mdbootstrap.com/">Home page</a></li>
+                                        <li id="menu-item-81400" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-81400"><a class="collapsible-header waves-effect" id="link-menu-item-81400" href="https://mdbootstrap.com/docs/jquery/">About </a></li>
+                                        <li id="menu-item-44015" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-44015"><a class="collapsible-header waves-effect" id="link-menu-item-44015" href="https://mdbootstrap.com/docs/jquery/getting-started/download/">Download</a></li>
+                                        <li id="menu-item-59453" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-59453"><a class="collapsible-header waves-effect" id="link-menu-item-59453" href="https://mdbootstrap.com/education/bootstrap/quick-start/">Quick start</a></li>
+                                        <li id="menu-item-59445" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-59445"><a class="collapsible-header waves-effect" id="link-menu-item-59445" href="https://mdbootstrap.com/education/bootstrap/">Full tutorial</a></li>
+
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>    
+                    </li>
+                    <!-- /. Side navigation links -->
+                    <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 205px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 52px;"></div></div></ul>
+                <div class="sidenav-bg mask-strong"></div>
+            </div>
+
+            <!-- Navbar-->
+            <nav class="navbar fixed-top navbar-expand-md navbar-light white double-nav scrolling-navbar">
+                <!-- SideNav slide-out button -->
+                <div class="float-left">
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i><span class="sr-only" aria-hidden="true">Toggle side navigation</span></a>
+                </div>
+                <!-- Navbar links-->
+                <div class="mr-auto pl-2">
+                    <span class="d-none d-lg-inline-block">
+
+                        <!-- Dynamic content wrapper -->
+                        <span id="dynamicContentWrapper-mainNavbar" class="dynamic-content">
+                            <a alt="Dynamic: Pro" id="navbar-jquery-dynamic-pro" class="btn btn-danger btn-sm my-0" href="/products/jquery-ui-kit/" role="button">
+                                <span class="d-none d-lg-inline-block mr-1">Home</span><i class="far fa-gem"></i>
+                            </a></span>
+
+                        <!--Angular-->
+                        <a id="navbar-category-gettingstarted-jquery" class="btn btn-info btn-sm my-0 waves-effect waves-light" href="/docs/jquery/getting-started/download/" role="button">
+                            <span class="d-none d-lg-inline-block mr-1">Getting started</span>
+                            <i class="fas fa-download"></i>
+                        </a>
+                        <a id="navbar-category-tutorial-jquery" class="btn btn-info btn-sm my-0 waves-effect waves-light" href="/education/bootstrap/" role="button">
+                            <span class="d-none d-lg-inline-block mr-1">Tutorial</span>
+                            <i class="fas fa-graduation-cap"></i>
+                        </a>
+                        <span id="dynamicContentWrapper-mainNavbar3" class="dynamic-content"><a alt="Dynamic: Products" class="btn btn-mdb-color btn-sm my-0" href="/products/" role="button"><span class="d-none d-lg-inline-block mr-1">Products</span><i class="far fa-gem"></i></a></span>
+
+                    </span>
+                </div>
+
+                <!--Navigation icons-->
+                <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+
+                    <li class="nav-item">
+                        <a href="/contact" data-toggle="modal" data-target="#contactForm" class="nav-link waves-effect">
+                            <i class="fas fa-envelope"></i><span class="sr-only">Contact us</span>
+                        </a>
+                    </li>
+
+                    <!-- <li class="nav-item ">
+                      <a href="/profile/?id=52770#messages" class="nav-link waves-effect headerNotifCountBadge">
+                        <i class="fas fa-comments"></i><span class="sr-only">Direct messages</span>
+                      </a>
+                    </li> -->
+
+                    <!-- Tools -->
+                    <li id="navbar-static-tools" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbar-tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-wrench"></i><span class="d-none d-lg-inline-block ml-1">Tools</span></a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbar-tools">
+                            <a class="dropdown-item waves-effect waves-light" href="/support/">Support</a>
+
+                        </div>
+                    </li>
+
+                    <!-- Login / register -->
+                    <!-- My account -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect" href="#" id="navbar-account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img alt="user avatar" src="https://secure.gravatar.com/avatar/8ead8e2216a56a69b23ea8ab91b550e0?s=24&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ead8e2216a56a69b23ea8ab91b550e0?s=48&amp;d=mm&amp;r=g 2x" class="avatar avatar-24 photo rounded-circle z-depth-0" height="24" width="24">   
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="userDropdown" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">    
+                            <a id="navbar-static-profile" class="dropdown-item waves-effect waves-light" href="/profile/?id=52770">My profile</a>
+                            <a id="navbar-static-settings" class="dropdown-item waves-effect waves-light" href="/users/profile/setting">Settings</a>
+                            <a id="navbar-static-logout" class="dropdown-item waves-effect waves-light" href="/users/logout">Log Out</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- /.Navbar-->
+            <div class="card card-intro sky-gradient">
+
+            </div>
+        </header>
+
+        <!--Main layout-->
+        <main class="pt-4">
+
+            <!--Section: Page content-->
+            <section id="mdb-panel-page-content">
+                <!-- Table with panel -->
+                <div class="card card-cascade narrower">
+
+                    <!--Card image-->
+                    <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-th-large mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-columns mt-0"></i>
+                            </button>
+                        </div>
+
+                        <a href="" class="white-text mx-3">Attendees List</a>
+
+                        <div>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-user-plus mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="far fa-trash-alt mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-info-circle mt-0"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalSubmitProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+
+                            <!--Content-->
+                            <div class="modal-content">
+
+                                <!--Header-->
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold">
+                                        Create A New Class
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                </div>
+
+                                <div id="mdb-project-preloader" class="checkout-preloader-container" style="display: none;">
+                                    <div class="preloader-wrapper big active">
+                                        <div class="spinner-layer spinner-blue-only">
+                                            <div class="circle-clipper left">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="gap-patch">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="circle-clipper right">
+                                                <div class="circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Body-->
+                                <form class="text-center border border-light">
+                                    <div class="modal-body mb-0">
+                                        <select id="demo-type" class="browser-default custom-select mb-3">
+                                            <option value="normal">Canvas Tool + Chat</option>
+                                            <option value="canvas-stream">Canvas Tool + Chat + Canvas Stream</option>
+                                            <option value="screen-sharing" selected>Canvas Tool + Chat + Screen Sharing</option>
+                                        </select>
+                                        <!--Name-->
+                                        <div class="form-group">
+                                            <input type="text" id="txt-roomid" class="form-control mb-3" placeholder="Enter Room Id">
+                                        </div>
+                                        <!--Project URL address-->
+                                        <input type="text" id="txt-user-name" class="form-control mb-3" placeholder="Enter Your Name">                                         
+                                    </div>
+                                    <!--Footer-->
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                        <button id="btn-create-room" type="button" class="btn btn-primary waves-effect waves-light">Create
+                                            <i class="fas fa-check ml-1"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+
+                    <div class="px-4">
+
+                        <div class="table-wrapper">
+                            <!--Table-->
+                            <table class="table table-hover mb-0" id="dtMaterialDesignExample">
+
+                                <!--Table head-->
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input class="form-check-input" type="checkbox" id="checkbox">
+                                            <label class="form-check-label" for="checkbox"> </label>
+                                        </th>
+                                        <th class="th-lg">
+                                            <a href="javascript://">First Name                                              
+                                            </a>
+                                        </th>
+                                        <th class="th-lg">
+                                            <a href="javascript://">Last Name                                               
+                                            </a>
+                                        </th>
+                                        <th class="th-lg">
+                                            <a href="javascript://">Username
+                                            </a>
+                                        </th>
+                                        <th class="th-lg">
+                                            <a href="javascript://">Username                                                
+                                            </a>
+                                        </th>
+                                        <th class="th-lg">
+                                            <a href="javascript://">Username
+                                            </a>
+                                        </th>
+                                        <th class="th-lg">
+                                            <a href="javascript://">Username
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!--Table head-->
+
+                                <!--Table body-->
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox1">
+                                            <label class="form-check-label" for="checkbox1" class="label-table"></label>
+                                        </th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox2">
+                                            <label class="form-check-label" for="checkbox2" class="label-table"></label>
+                                        </th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr><tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr><tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr><tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr><tr>
+                                        <th scope="row">
+                                            <input class="form-check-input" type="checkbox" id="checkbox3">
+                                            <label class="form-check-label" for="checkbox3" class="label-table"></label>
+                                        </th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr> 
+
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
+
+                    </div>
+                </div>
+
+                </div>
+                <!-- Table with panel -->
+
+            </section>
+            <!--Section: Page content-->
+        </main>
+
+
+
+
+
+        <!--<script type="text/javascript" src="https://mdbootstrap.com/wp-admin/load-scripts.php?c=gzip&amp;load%5B%5D=wp-embed,jquery-ui-core,jquery-ui-widget,jquery-ui-mouse,jquery-ui-slider&amp;ver=4.9.9"></script>-->
+        <!--<script type="text/javascript" src="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/4.6.1/compiled.min.js?ver=4.6.1"></script><div class="hiddendiv common"></div>-->
+        <!--<script type="text/javascript" src="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/footer-functions.js?ver=4.6.1"></script><div class="drag-target" style="left: 0px; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>-->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="/demos/js/jquery.validate.min.js" ></script>
+        <script src="http://malsup.github.com/jquery.form.js"></script>
+
+
+        <!--<script src="/demos/js/popper.min.js"></script>-->
+        <!--<script src="/demos/js/bootstrap.min.js"></script>-->  
+
+        <script src="https://mdbootstrap.com/previews/templates/admin-dashboard/js/addons/datatables.min.js"></script>
+        <script src="https://mdbootstrap.com/previews/templates/admin-dashboard/js/mdb.min.js"></script>
+
+        <!--    <link href="https://mdbootstrap.com/previews/templates/admin-dashboard/css/mdb.min.css">-->
+
+        <link href="/demos/css/datatables.min.css" rel="stylesheet">
+
+    </body>
+</html>
+<script>
+                            $('#dtMaterialDesignExample').DataTable();
+                            $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+                                $(this).parent().append($(this).children());
+                            });
+                            $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+                                $('input').attr("placeholder", "Search");
+                                $('input').removeClass('form-control-sm');
+                            });
+                            $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+                            $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+                            $('#dtMaterialDesignExample_wrapper select').removeClass(
+                                    'custom-select custom-select-sm form-control form-control-sm');
+                            $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+                            $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
+                            $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+</script>
+
